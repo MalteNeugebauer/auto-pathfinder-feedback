@@ -2,11 +2,11 @@
 This repository offers resources to implement automated feedback based on distance calculations into learning management systems (LMS) like [Moodle](https://moodle.org).
 
 ## Motivation
-Contemporary LMS are capable of giving students reliable and helpful feedback on errorneous responses to digital exercises *if previously defined by instructors*, which is a time consuming task and not capable of covering any possible mistake learners do. This approach is **reliable**, but **not robust.** In contrast to this, LLMs do not need this preliminary work to provide automatic feedback, but *their feedback is not 100% reliable*, as it is based on training data and hallucinations cannot be ruled out with certainty. Thus, this approach is **robust**, but **not reliable**.
+Contemporary LMS are capable of giving students reliable and helpful feedback on errorneous responses to digital exercises *if previously defined by instructors*, which is a time consuming task and not capable of covering any possible mistake students do. This approach is **reliable**, but **not robust.** In contrast to this, LLMs do not need this preliminary work to provide automatic feedback, but *their feedback is not 100% reliable*, as it is based on training data and hallucinations cannot be ruled out with certainty. Thus, this approach is **robust**, but **not reliable**.
 
 The prototype presented here uses tree edit distance calculations to give automated additional distance-based feedback on students' errorneous inputs to open response mathematical questions. The such generated feedback is
 
- - **both robust**, as it applies to any errorneous input students may do
+ - **both robust**, as it applies to any errorneous input students may do,
  - **and reliable**, as it is based on rule-based algorithms, instead of being dependent on training data.
 
 ## Screenshots from LMS
@@ -38,16 +38,16 @@ If you additionally want to adapt the code that calculates the distances ([Way 3
 ### Way 3: Manual Integration Into Questions
 1. Append the code provided in [converttotree.mac](converttotree.mac) to the question variables box of your STACK question. The provided function allows for converting mathematical expressions into tree structured objects, which is necessary to calculate the according distances.
 1. Choose at what point you want the distance-based feedback to be given to the students and insert the following code into the according boxes of your potential response tree (PRT). Note, that to enter code into the PRT, you may need to switch to the code level in Moodle's integrated text editor.
- - 2.1 <a name="way-3-step-2-1"></a>To induce the distance calculation routine, copy and paste the code provided in [main.js](dist/main.js) as follows
+ - 2.1 <a name="way-3-step-2-1"></a>To induce the distance calculation routine, copy the code provided in [main.js](dist/main.js) and paste it into the PRT between `<script>`-tags in the following form.
 ```
 <script>...content of main.js goes here...</script>
 ```
- - 2.2 To inform the distance calculation routine about the **tree of the learner's input**, add the following code lines below. Replace `ans1` by the variable that contains the learner's input.
+ - 2.2 To inform the distance calculation routine about the **tree of the student's input**, add the following code lines below. Replace `ans1` by the variable that contains the student's input.
 
 ```
 <div class="maxima-code-output mco-student" style="display: none;">{@sconcat(converttotree(ans1))@}</div>
 ```
- - 2.3 To inform about the **sample solution's tree(s)** to compare with, add an arbitrary amount of the following lines, where `ta1` is to be replaced by the variable that contain a sample solution. The following example tells the system to compare the learner's input to two possible sample solutions, namely `ta1` and `ta1alt`.
+ - 2.3 To inform about the **sample solution's tree(s)** to compare with, add an arbitrary amount of the following lines, where `ta1` is to be replaced by the variable that contain a sample solution. The following example tells the system to compare the student's input to two possible sample solutions, namely `ta1` and `ta1alt`.
 ```
 <div class="maxima-code-output mco-teacher" style="display: none;">{@sconcat(converttotree(ta1))@}</div>
 <div class="maxima-code-output mco-teacher" style="display: none;">{@sconcat(converttotree(ta1alt))@}</div>
