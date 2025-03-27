@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 6640  -->
+  <question type="stack">
+    <name>
+      <text>t1-03-3h Addition of fractions:Expand with term 2 (TED_REL)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Add or subtract and summarize as far as possible.</p>
+<p>\({@exercise@} =\)[[input:ans1]] [[validation:ans1]] [[feedback:prt1]]</p>
+<p class="hint">Attention: Sum in the denominator!</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <stackversion>
+      <text>2024072400</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[varlist:[a,b,c,x,y,z]; myvar:rand(varlist);
+mynumbers:[];
+mynumbers:append(mynumbers,[rand(3)+1]);
+mynumbers:append(mynumbers,[rand_with_prohib(-5,5,[0])]);
+denominators:random_permutation([myvar-mynumbers[1], mynumbers[1]+myvar]);
+numerator:myvar;
+summands:random_permutation([numerator/denominators[1], numerator/denominators[2], mynumbers[2]]);
+exercise:summands[1]+summands[2]+summands[3];
+common_denom:denominators[1]*denominators[2];
+fraction:(numerator*denominators[2]+numerator*denominators[1])/common_denom;
+ta1:fraction+mynumbers[2];
+ta1alt:expand(num(fraction))/expand(denom(fraction))+mynumbers[2];
+converttotree(expr):= block(
+   [op, args,expri],
+   if atom(expr) then
+     return([string(expr)])
+   elseif ( is(op(expr)="-") and is(length(args(expr))=1)) and is(atom(first(args(expr)))) then
+     return ["-",string(first(args(expr)))]
+   elseif ( is(op(expr)="-") and is(length(args(expr))=1)) then (
+     expri : first(args(expr)),
+     if ( is(op(expri)="/") and is(length(args(expri))=2) and integerp(first(args(expri))) and integerp(second(args(expri))) ) then
+     return([sconcat("-",string(first(args(expri))),"/",string(second(args(expri))))])
+   )
+   elseif ( is(op(expr)="/") and is(length(args(expr))=2) and integerp(first(args(expr))) and integerp(second(args(expr))) ) then
+     return([sconcat(string(first(args(expr))),"/",string(second(args(expr))))])
+   else 0,
+   op : op(expr),
+   args : args(expr),
+   return(append([op],makelist(converttotree(a), a, args)))
+);]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text></text>
+    </specificfeedback>
+    <questionnote format="html">
+      <text><![CDATA[<p>\({@exercise@} = {@ta1@}\)</p>]]></text>
+    </questionnote>
+    <questiondescription format="html">
+      <text></text>
+    </questiondescription>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-check" style="color: green;"></i> Correct, well done!</p>]]></text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-adjust" style="color: orange;"></i> Partially correct.</p>]]></text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text><![CDATA[<p><i class="fa fa-times" style="color: red;"></i> Incorrect.</p>]]></text>
+    </prtincorrect>
+    <decimals>.</decimals>
+    <scientificnotation>*10</scientificnotation>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <logicsymbol>lang</logicsymbol>
+    <matrixparens>[</matrixparens>
+    <variantsselectionseed></variantsselectionseed>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans>ta1</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>5</insertstars>
+      <syntaxhint></syntaxhint>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords></forbidwords>
+      <allowwords></allowwords>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options></options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackstyle>1</feedbackstyle>
+      <feedbackvariables>
+        <text></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <description></description>
+        <answertest>EqualComAss</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions></testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>1</name>
+        <description></description>
+        <answertest>EqualComAss</answertest>
+        <sans>ans1</sans>
+        <tans>ta1alt</tans>
+        <testoptions></testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-2-T</trueanswernote>
+        <truefeedback format="html">
+          <text></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>2</falsenextnode>
+        <falseanswernote>prt1-2-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>2</name>
+        <description></description>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>ta1</tans>
+        <testoptions></testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0.1</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-3-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p dir="ltr" style="text-align: left;">You can simplify even further.</p>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>3</falsenextnode>
+        <falseanswernote>prt1-3-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+      <node>
+        <name>3</name>
+        <description>TED Feedback</description>
+        <answertest>AlgEquiv</answertest>
+        <sans>1</sans>
+        <tans>1</tans>
+        <testoptions></testoptions>
+        <quiet>0</quiet>
+        <truescoremode>+</truescoremode>
+        <truescore>0</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-4-T</trueanswernote>
+        <truefeedback format="html">
+          <text><![CDATA[<p>
+<script>(()=>{var e={944:(e,n,t)=>{e.exports={ted:t(45),levenshtein:t(635)}},635:(e,n,t)=>{var r,o,l,s,i;({Mapping:r,zero:i,trackedMin:s}=t(122)),o=function(e,n,t,o,a){var u,h,c,d,p,f,g,v,m,k,b,x,y,M,w,A,C,L;for(c=n,L=i((u=e).length+1,c.length+1),p=i(u.length+1,c.length+1),g=m=1,M=u.length;m<=M;g=m+=1)p[g][0]=g;for(v=k=1,w=c.length;k<=w;v=k+=1)p[0][v]=v;for(g=b=1,A=u.length;b<=A;g=b+=1)for(v=y=1,C=c.length;y<=C;v=y+=1)h=u[g-1],d=c[v-1],x=s(p[g-1][v]+o(h),p[g][v-1]+t(d),p[g-1][v-1]+a(h,d)),L[g][v]=x.index,p[g][v]=x.value;return f=p[u.length][c.length],new r(u,c,f,L,l)},l=function(e,n,t){var r,o,l;for(r=e.length,o=n.length,l=[];r>0&&o>0;)switch(t[r][o]){case 0:l.push([e[r-1],null]),--r;break;case 1:l.push([null,n[o-1]]),--o;break;case 2:l.push([e[r-1],n[o-1]]),--r,--o;break;default:throw new Error(`Invalid operation ${t[r][o]} at (${r}, ${o})`)}if(0===r&&0!==o)for(;o>0;)l.push([null,n[o-1]]),--o;if(0!==r&&0===o)for(;r>0;)l.push([e[r-1],null]),--r;return l},e.exports=o},45:(e,n,t)=>{var r,o,l,s,i,a;({Mapping:r,zero:a,trackedMin:i}=t(122)),o=function(e,n,t){var r,o,l,s,i,a,u,h,c,d,p;for(p=[],(d=[]).push([void 0,e]);d.length>0;)for([s,u]=d.pop(),l=null!=(h=null!=(o=n(u))?o[0]:void 0)?h:null,p.push([s,u,l]),s=i=0,a=(c=null!=o?o:[]).length;i<a;s=++i)r=c[s],d.push([s,r]);for(;p.length>0;)[s,u,l]=p.pop(),t(s,u,l)},l=function(e,n,t,l,u,h){var c,d,p,f,g,v,m,k,b,x,y,M,w,A,C;for(A=function(e,n){var t,r,o,s,a,d,p,f,g,v,m,k,b,w,A,L,$,S,T,q,E;for(r=x.llds,a=y.llds,o=x.nodes,d=y.nodes,p=r[e]-1,f=a[n]-1,m=e-r[e]+2,b=n-a[n]+2,t=g=1,S=m;g<S;t=g+=1)c[t][0]=c[t-1][0]+u(o[t+p]);for(s=v=1,T=b;v<T;s=v+=1)c[0][s]=c[0][s-1]+l(d[s+f]);for(t=w=1,q=m;w<q;t=w+=1)for(s=$=1,E=b;$<E;s=$+=1)r[e]===r[t+p]&&a[n]===a[s+f]?(k=i(c[t-1][s]+u(o[t+p]),c[t][s-1]+l(d[s+f]),c[t-1][s-1]+h(o[t+p],d[s+f])),C[t+p][s+f]=k.index,M[t+p][s+f]=c[t][s]=k.value):(A=r[t+p]-1-p,L=a[s+f]-1-f,c[t][s]=Math.min(c[t-1][s]+u(o[t+p]),c[t][s-1]+l(d[s+f]),c[A][L]+M[t+p][s+f]))},x=(m=function(e){var n;return n={nodes:[],llds:[],keyroots:[]},o(e,t,(function(e,t,r){var o,l,s;s=n.nodes.length,n.nodes.push(t),null==r?l=s:(o=n.nodes.indexOf(r),l=n.llds[o]),n.llds.push(l),0!==e&&n.keyroots.push(s)})),n})(e),y=m(n),C=a(x.nodes.length,y.nodes.length),M=a(x.nodes.length,y.nodes.length),c=a(x.nodes.length+1,y.nodes.length+1),p=0,g=(k=x.keyroots).length;p<g;p++)for(d=k[p],f=0,v=(b=y.keyroots).length;f<v;f++)A(d,b[f]);return w=M[x.nodes.length-1][y.nodes.length-1],new r(x,y,w,C,s)},s=function(e,n,t){var r,o,l;for(l=[],r=e.nodes.length-1,o=n.nodes.length-1;r>=0&&o>=0;)switch(t[r][o]){case 0:l.push([e.nodes[r],null]),--r;break;case 1:l.push([null,n.nodes[o]]),--o;break;case 2:l.push([e.nodes[r],n.nodes[o]]),--r,--o;break;default:throw new Error(`Invalid operation ${t[r][o]} at (${r}, ${o})`)}if(-1===r&&-1!==o)for(;o>=0;)l.push([null,n.nodes[o]]),--o;if(-1!==r&&-1===o)for(;r>=0;)l.push([e.nodes[r],null]),--r;return l},e.exports=l},122:e=>{e.exports.Mapping=class{constructor(e,n,t,r,o){this.pairs=this.pairs.bind(this),this.alignment=this.alignment.bind(this),this.a=e,this.b=n,this.distance=t,this.track=r,this.backtrackFn=o,this.pairCache=null}pairs(){return null==this.pairCache&&(this.pairCache=this.backtrackFn(this.a,this.b,this.track)),this.pairCache}alignment(){var e,n,t,r,o,l;for(e=[],n=[],t=0,r=(l=this.pairs().reverse()).length;t<r;t++)o=l[t],e.push(o[0]),n.push(o[1]);return{alignmentA:e,alignmentB:n}}},e.exports.zero=function(e,n){var t,r,o,l,s,i,a,u;for(a=new Array(e),t=o=0,s=e;o<s;t=o+=1)for(u=a[t]=new Array(n),r=l=0,i=n;l<i;r=l+=1)u[r]=0;return a},e.exports.trackedMin=function(e,n,t){var r;return n<(r={value:e,index:0}).value&&(r.value=n,r.index=1),t<r.value&&(r.value=t,r.index=2),r}}},n={};function t(r){var o=n[r];if(void 0!==o)return o.exports;var l=n[r]={exports:{}};return e[r](l,l.exports,t),l.exports}(()=>{var e,n,r,o=t(944);e=n=function(e){return 1},r=function(e,n){return e.id!==n.id?1:0};var l=function(e){return e.children};function s(e){if(Array.isArray(e[0]))return!1;let n={id:e[0]},t=e.slice(1);if(t.length>0){n.children=[];for(let e in t)n.children.push(s(t[e]))}return n}function i(e){let n={};try{n=JSON.parse(e)}catch(e){console.log(e),console.log("An error occured. The distance is probably wrong as at least one tree is empty due to error detection.")}return n}document.addEventListener("DOMContentLoaded",(function(){!function(){let t=document.querySelectorAll(".maxima-code-output.mco-teacher"),a=document.querySelector(".maxima-code-output.mco-student"),u=[];for(let e=0;e<t.length;e++)u.push(t[e].innerHTML);console.log(u);let h=u.map(i);console.log(h);let c=i(a.innerHTML);console.log(c);let d=h.map(s),p=s(c),f=s(["1"]),g=[],v=[],m=!1;for(let t=0;t<d.length;t++){let s=o.ted(p,d[t],l,e,n,r);if(null==s||null==s.distance)continue;let i=o.ted(f,d[t],l,e,n,r);if(!(null==i||null==i.distance||i.distance<=0)){if(1==i.distance){m=!0;break}g.push(s.distance),v.push(s.distance/i.distance)}}if(g.length>0&&0==m){let e="abs",n=document.querySelector(".maxima-code-output.mco-ted-feedback");null!=n&&n.classList.contains("mco-ted-rel")&&(e="rel");let t=document.querySelector(".maxima-code-output.mco-ted-feedback");null==t&&(t=document.createElement("div"),a.parentNode.appendChild(t));let r="";if("abs"==e){let e=Math.min(...g);e>0&&(r="To solve this, "+e+" thing"+(1==e?"":"s")+" need"+(1==e?"s":"")+" to be changed."),console.log(e)}else{let e=Math.min(...v),n=Math.round(100*(1-e));console.log(n),n>0&&(r="Your input matches the solution by "+n+"%.")}t.innerHTML=r}}()}))})()})();</script>
+</p>
+<div class="maxima-code-output mco-teacher" style="display: none;">{@sconcat(converttotree(ta1))@}</div>
+<div class="maxima-code-output mco-teacher" style="display: none;">{@sconcat(converttotree(ta1alt))@}</div>
+<div class="maxima-code-output mco-student" style="display: none;">{@sconcat(converttotree(ans1))@}</div>
+<div class="maxima-code-output mco-ted-feedback mco-ted-rel"> </div>]]></text>
+        </truefeedback>
+        <falsescoremode>-</falsescoremode>
+        <falsescore>0</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-4-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+    </prt>
+    <deployedseed>2108988964</deployedseed>
+  </question>
+
+</quiz>

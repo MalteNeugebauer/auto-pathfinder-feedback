@@ -1,0 +1,18 @@
+converttotree(expr):= block(
+   [op, args,expri],
+   if atom(expr) then
+     return([string(expr)])
+   elseif ( is(op(expr)="-") and is(length(args(expr))=1)) and is(atom(first(args(expr)))) then
+     return ["-",string(first(args(expr)))]
+   elseif ( is(op(expr)="-") and is(length(args(expr))=1)) then (
+     expri : first(args(expr)),
+     if ( is(op(expri)="/") and is(length(args(expri))=2) and integerp(first(args(expri))) and integerp(second(args(expri))) ) then
+     return([sconcat("-",string(first(args(expri))),"/",string(second(args(expri))))])
+   )
+   elseif ( is(op(expr)="/") and is(length(args(expr))=2) and integerp(first(args(expr))) and integerp(second(args(expr))) ) then
+     return([sconcat(string(first(args(expr))),"/",string(second(args(expr))))])
+   else 0,
+   op : op(expr),
+   args : args(expr),
+   return(append([op],makelist(converttotree(a), a, args)))
+);
